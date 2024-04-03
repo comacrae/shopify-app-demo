@@ -70,7 +70,7 @@ class Shopify{
       $data = explode(':',$content);
       $headers[trim($data[0])] = trim($data[1]);
     }
-    echo print_r($headers);
+    return array('headers' => $headers,'body'=> $response[1]);
 
     }
   }
