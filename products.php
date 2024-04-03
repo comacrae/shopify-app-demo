@@ -12,6 +12,37 @@ $products = $shopify ->rest_api("/admin/api/2021-04/products.json", array(), "GE
 
 $products = json_decode($products['body'], true);
 
-echo print_r($products);
-
 ?>
+
+<?php include_once("header.php");?>
+
+<section>
+  <table>
+    <thead>
+      <tr>
+        <th colspan="2">Product</th>
+        <th>Status</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <?php
+        foreach($products as $product){
+          foreach($product as $key => $value){
+            $image = count($value["images"]) > 0 ? $value['images'][0]['src'] : "";
+            ?>
+            <tr>
+              <td><img src="<?php echo $image;?>" width=35 height=35></td>
+              <td><?php echo $value['title']?></td>
+              <td><?php echo $value['status']?></td>
+              <td><button class="secondary icon-trash"></button></td>
+            </tr>
+            <?php
+          }
+        }
+      ?>
+    </tbody>
+  </table>
+</section>
+
+<?php include_once("footer.php");?>
